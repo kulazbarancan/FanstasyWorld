@@ -2388,3 +2388,39 @@ AssetImportParameters requested are different than current active one (requested
   custom:scripting/monoscript/fileName/GetInstallerTmpFileName.cs: fa7bda723ac795b48e38504727f44981 -> d09e0b5c7a9af5874530e17ef23025f0
   custom:scripting/monoscript/fileName/AssetModificationProcessor.cs: 84d720d70e5c24b7d0630ef5cea215ce -> a602c9e59e7db185e3a0d68d986e6fef
   custom:scripting/monoscript/fileName/IsCollabProjectMigratedResponse.cs: 4c3294c6a51e6f42161d191230692016 -> af2b76c693935deee55cfcaed2aa7568
+========================================================================
+Received Import Request.
+  Time since last request: 1291.606311 seconds.
+  path: Assets/nappin/House Props Softpack
+  artifactKey: Guid(b312f3958033d7e498348c6a858dc571) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/nappin/House Props Softpack using Guid(b312f3958033d7e498348c6a858dc571) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '53b2c236b2028398e29a171db061a201') in 0.003769 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.752290 seconds.
+  path: Assets/nappin/House Props Softpack/(Sc)HouseInterior.unity
+  artifactKey: Guid(774bfa0e009424c55805db07162419b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/nappin/House Props Softpack/(Sc)HouseInterior.unity using Guid(774bfa0e009424c55805db07162419b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '5066fafa380e8fa5d39b4c4cfb6b4179') in 0.000493 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 20.902765 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '2418d44e161e3ce2e8daeaa5c00c20e4') in 0.000539 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 9.026924 seconds.
+  path: Assets/Scenes/GamePlayScene.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/GamePlayScene.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'ed68408f0d0d76f7226bccdab13ada06') in 0.000525 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
