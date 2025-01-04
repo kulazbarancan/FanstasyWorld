@@ -823,7 +823,7 @@ MonoBehaviour:
   Chairs:
   - isEmpty: 1
     chair: {fileID: 7064135152102279018}
-  - isEmpty: 1
+  - isEmpty: 0
     chair: {fileID: 1012188869}
 --- !u!4 &1448775276
 Transform:

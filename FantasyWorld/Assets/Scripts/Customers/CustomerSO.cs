@@ -5,20 +5,10 @@ namespace Customers
     [CreateAssetMenu(fileName = "Customer", menuName = "ScriptableObjects/Customer")]
     public class CustomerSO : ScriptableObject
     {
-        public enum CustomerPaymentBehiaviorState
-        {
-            Pay,
-            RunNotPay,
-            Fight,
-        }
-        public enum CustomerFinancialState
-        {
-            Normal,
-            HasMove,
-            Rich,
-            UltraRich
-        }
+        public CustomerBehaivorEnum customerBehiaviorState;
+        public CustomerMoneyTypeEnum customerPaymentBehiaviorState;
         public Customer customerPrefab;
         public float customerSpeed;
+        public int alcoholLimit;
     }
 }

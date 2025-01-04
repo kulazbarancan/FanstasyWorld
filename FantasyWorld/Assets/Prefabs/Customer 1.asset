@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2ad7dcf2f34a41917190d99f4b0c62, type: 3}
   m_Name: Customer 1
   m_EditorClassIdentifier: 
+  customerBehiaviorState: 0
+  customerPaymentBehiaviorState: 0
   customerPrefab: {fileID: 4748853038952306389, guid: 60e7fa72371044a06afdcc70154b8dbc, type: 3}
+  customerSpeed: 2
+  alcoholLimit: 0

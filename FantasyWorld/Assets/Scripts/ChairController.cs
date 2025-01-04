@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
@@ -9,18 +10,28 @@ namespace DefaultNamespace
     {
         public static event Action<Chair> OnCustomerRequested;
         public List<Chair> Chairs;
-        
+
         [Button]
-        public void CallCustomer()
+        public void CallRequestCustomer()
         {
-            foreach (Chair chair in Chairs)
+            StartCoroutine(CallCustomer());
+        }
+
+
+        public IEnumerator CallCustomer()
+        {
+            while (true)
             {
-                chair.CheckChairStatus();
-                if (!chair.isEmpty)
+                yield return new WaitForSeconds(5f);
+                foreach (Chair chair in Chairs)
                 {
-                    Debug.Log("Request Sended");
-                    OnCustomerRequested.Invoke(chair);
-                    //There is a empty chair in shop
+                    chair.CheckChairStatus();
+                    if (!chair.isEmpty)
+                    {
+                        Debug.Log("Request Sended");
+                        OnCustomerRequested.Invoke(chair);
+                        //There is a empty chair in shop
+                    }
                 }
             }
         }

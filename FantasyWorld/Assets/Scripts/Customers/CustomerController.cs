@@ -31,8 +31,9 @@ public class CustomerController : MonoBehaviour
         newCustomer.targetChair = chair.chair.transform;
         newCustomer.customerExitPos = customerExitPos;
         newCustomer.customerChair = chair;
+        newCustomer.Initialize(customerList[randomCustomer]);
         OnCustomerReadyToGo.Invoke(newCustomer);
-        chair.isEmpty = false;
+        chair.isEmpty = true;
         Debug.Log("CAGIRILDI");
     }
 }
