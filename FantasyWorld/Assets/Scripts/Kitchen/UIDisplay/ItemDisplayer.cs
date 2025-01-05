@@ -8,5 +8,6 @@ namespace DefaultNamespace.Kitchen.UIDisplay
     {
         public TextMeshProUGUI itemAmountTxt;
         public Image itemSprite;
+        public float itemPrice;
     }
 }
