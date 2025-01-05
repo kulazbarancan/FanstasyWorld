@@ -6,13 +6,14 @@ using DefaultNamespace;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CustomerController : MonoBehaviour
+public class CustomerController : ScopedSingletonMonoBehaviour<CustomerController>
 {
     public static event Action<Customer> OnCustomerReadyToGo;
     
     public Transform customerExitPos;
     public Transform customerStartPos;
     public List<CustomerSO> customerList;
+    public List<Customer> activeCustomerList;
 
     private void OnEnable()
     {
@@ -28,6 +29,7 @@ public class CustomerController : MonoBehaviour
     {
         var randomCustomer = Random.Range(0, customerList.Count);
         var newCustomer = Instantiate(customerList[randomCustomer].customerPrefab, customerStartPos.position, Quaternion.identity);
+        activeCustomerList.Add(newCustomer);
         newCustomer.targetChair = chair.chair.transform;
         newCustomer.customerExitPos = customerExitPos;
         newCustomer.customerChair = chair;

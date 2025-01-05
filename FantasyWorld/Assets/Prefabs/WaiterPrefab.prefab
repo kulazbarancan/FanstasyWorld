@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 952647900867540285}
   - component: {fileID: 1851210425949904047}
   - component: {fileID: 5596075735707879278}
-  - component: {fileID: 4748853038952306389}
+  - component: {fileID: 6000528103249510500}
   m_Layer: 0
-  m_Name: CustomerPrefab
+  m_Name: WaiterPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e03c61940200c9b428ea54b9134ba0a7, type: 2}
+  - {fileID: 2100000, guid: fb698345bbbc4d74ba2ca7b2bb59eb9d, type: 2}
+  - {fileID: 2100000, guid: fb698345bbbc4d74ba2ca7b2bb59eb9d, type: 2}
+  - {fileID: 2100000, guid: fb698345bbbc4d74ba2ca7b2bb59eb9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +111,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4748853038952306389
+--- !u!114 &6000528103249510500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,19 +120,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1908722851438762388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e30f3a4268884f248791176dc340715a, type: 3}
+  m_Script: {fileID: 11500000, guid: 50a036bd8f9c4912856e181b5e8b583d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerAttentionObject: {fileID: 8213051749359236694}
-  customerSO: {fileID: 0}
-  customerChair:
-    isEmpty: 0
-    chair: {fileID: 0}
-  targetChair: {fileID: 0}
-  customerExitPos: {fileID: 0}
   speed: 0
-  money: 0
-  alcoholLimit: 0
+  isBusy: 0
+  target: {fileID: 0}
 --- !u!1 &8213051749359236694
 GameObject:
   m_ObjectHideFlags: 0

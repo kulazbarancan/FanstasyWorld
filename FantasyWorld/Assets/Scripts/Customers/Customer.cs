@@ -9,10 +9,14 @@ namespace Customers
 {
     public class Customer : MonoBehaviour
     {
+        public static event Action OnWaiterReadyToGo;
+        
+        public GameObject customerAttentionObject;
         public CustomerSO customerSO;
         public Chair customerChair;
         public Transform targetChair;
         public Transform customerExitPos;
+        public bool alreadyOrdered;
 
         public float speed;
         public float money;
@@ -47,18 +51,29 @@ namespace Customers
         {
             transform.DOMove(targetChair.position, 1f).OnComplete(() =>
             {
-                StartCoroutine(nameof(StartCustomerLifeTime));
+                StartCoroutine(nameof(StartOrder));
             });
         }
 
-
-        public IEnumerator StartCustomerLifeTime()
+        private IEnumerator StartOrder()
         {
-            var randomTime = Random.Range(0, 50);
-            yield return new WaitForSeconds(1);
+            var randomTime = Random.Range(15, 30);
+            customerAttentionObject.SetActive(true);
+            OnWaiterReadyToGo.Invoke();
+            switch (customerSO.customerPaymentBehiaviorState)
+            {
+                case CustomerMoneyTypeEnum.Normal:
+                    break;
+                case CustomerMoneyTypeEnum.HasMoney:
+                    break;
+                case CustomerMoneyTypeEnum.Rich:
+                    break;
+                case CustomerMoneyTypeEnum.UltraRich:
+                    break;
+            }
+            yield return new WaitForSeconds(randomTime);
             DecideWhatYouWantToDo();
         }
-
         private void DecideWhatYouWantToDo()
         {
             switch (customerSO.customerBehiaviorState)
@@ -76,6 +91,7 @@ namespace Customers
             transform.DOMove(customerExitPos.position, 1f).OnComplete(() =>
             {
                 customerChair.isEmpty = false;
+                CustomerController.Instance.activeCustomerList.Remove(this);
                 Destroy(gameObject);
             });
         }
