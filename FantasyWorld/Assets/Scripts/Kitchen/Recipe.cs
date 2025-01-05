@@ -6,6 +6,8 @@ namespace DefaultNamespace.Kitchen
     [CreateAssetMenu(fileName = "NewRecipe", menuName = "ScriptableObjects/Recipe", order = 2)]
     public class Recipe : ScriptableObject
     {
+        public float price;
+        public bool hasRecipe;
         public string recipeName; // Yemek adı
         public Sprite recipeImage; // Yemek görseli (UI için)
         public float preparationTime; // Hazırlık süresi

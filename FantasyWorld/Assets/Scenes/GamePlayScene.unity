@@ -582,8 +582,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fc94fa0f354469be6b3ed1776d8a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownedRecipes:
-  - {fileID: 11400000, guid: fc4cacaf3d2a44381a0b6fb4cda65cb7, type: 2}
+  ingredientList:
+  - {fileID: 11400000, guid: c8790088baf014f5689c0d62f3eab680, type: 2}
+  - {fileID: 11400000, guid: dfd0c378529154b778f2c0b0cf16c212, type: 2}
+  - {fileID: 11400000, guid: 7a66b3f2581f749c39c1768b0dcb3369, type: 2}
+  - {fileID: 11400000, guid: 6bf1059f42d5d4b8e91abb9543aa071e, type: 2}
+  allRecipes: []
 --- !u!1 &644052195
 GameObject:
   m_ObjectHideFlags: 0

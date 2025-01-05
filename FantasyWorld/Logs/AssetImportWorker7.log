@@ -30832,3 +30832,77 @@ AssetImportParameters requested are different than current active one (requested
   custom:scripting/monoscript/fileName/GetInstallerTmpFileName.cs: fa7bda723ac795b48e38504727f44981 -> d09e0b5c7a9af5874530e17ef23025f0
   custom:scripting/monoscript/fileName/AssetModificationProcessor.cs: 84d720d70e5c24b7d0630ef5cea215ce -> a602c9e59e7db185e3a0d68d986e6fef
   custom:scripting/monoscript/fileName/IsCollabProjectMigratedResponse.cs: 4c3294c6a51e6f42161d191230692016 -> af2b76c693935deee55cfcaed2aa7568
+========================================================================
+Received Import Request.
+  Time since last request: 285827.806510 seconds.
+  path: Assets/Food icons Pack/PNG/amanita.png
+  artifactKey: Guid(82179a193b1b04fb283c790342edb447) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/amanita.png using Guid(82179a193b1b04fb283c790342edb447) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '608ee57bca0839a9a13ae6f7e5b1fb95') in 0.506355 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 40.263163 seconds.
+  path: Assets/Food icons Pack/PNG/cheesecake.png
+  artifactKey: Guid(55fee746438a44352bf8b7ee9998f174) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/cheesecake.png using Guid(55fee746438a44352bf8b7ee9998f174) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '66f4b3b1578a9f3ee7bcbfe4fe30e6ba') in 0.027467 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 21.333076 seconds.
+  path: Assets/Food icons Pack/PNG/coffee.png
+  artifactKey: Guid(e0654092146b349cdbf2909a9205bca0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/coffee.png using Guid(e0654092146b349cdbf2909a9205bca0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'b6937889f0698b3c0ddccf7d0a602837') in 0.017772 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.078879 seconds.
+  path: Assets/Food icons Pack/PNG/cupcakes.png
+  artifactKey: Guid(db7fb36807d8146d5a12e66428f099c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/cupcakes.png using Guid(db7fb36807d8146d5a12e66428f099c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'b2ec7670961b4a31c4160f0265bed9e6') in 0.015029 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 22.792478 seconds.
+  path: Assets/Food icons Pack/PNG/fish.png
+  artifactKey: Guid(5015cfb60d29d45d9b4b73a29dac9603) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/fish.png using Guid(5015cfb60d29d45d9b4b73a29dac9603) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '51055aca33abb72758a135ce628ed940') in 0.016730 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 1.214119 seconds.
+  path: Assets/Food icons Pack/PNG/grapes.png
+  artifactKey: Guid(c715a9f7f4d044049ad333bf06306ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/grapes.png using Guid(c715a9f7f4d044049ad333bf06306ed0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '944f37f0adde98ab86d79fae4e19c12c') in 0.018518 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 1.556626 seconds.
+  path: Assets/Food icons Pack/PNG/ice.png
+  artifactKey: Guid(df40d3e5dec72471d973a4a020ddad98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Food icons Pack/PNG/ice.png using Guid(df40d3e5dec72471d973a4a020ddad98) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'afa8aff05fac7d8e6aa73cd4724ca92b') in 0.015439 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 89, details: Operation aborted.
+AssetImportWorker is now disconnected from the server
+Process exiting
