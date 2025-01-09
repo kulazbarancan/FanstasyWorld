@@ -8,8 +8,9 @@ using UnityEngine.Serialization;
 
 namespace DefaultNamespace.Waitors
 {
-    public class WaiterController : MonoBehaviour
+    public class WaiterController : SingletonMonoBehaviour<WaiterController>
     {
+        public Transform kitchenPos;
         public GameObject waiterPrefab;
         public Transform waiterExitPos;
         public Transform waiterStartPos;
@@ -24,50 +25,6 @@ namespace DefaultNamespace.Waitors
                 totalWaiters.Add(newWaiter.GetComponent<Waiter>());
             }
         }
-
-        private void OnEnable()
-        {
-            Customer.OnWaiterReadyToGo += CheckWaiters;
-        }
-
-        private void OnDisable()
-        {
-            Customer.OnWaiterReadyToGo -= CheckWaiters;
-        }
-
-        public void CheckWaiters()
-        {
-            StartCoroutine(CheckAvailableWaiter());
-        }
-
-        public IEnumerator CheckAvailableWaiter()
-        {
-            yield return new WaitForSeconds(1f);
-            foreach (var waiter in totalWaiters)
-            {
-                waiter.CheckStatus();
-                if (!waiter.isBusy)
-                {
-                    foreach (var customer in CustomerController.Instance.activeCustomerList)
-                    {
-                        if (!customer.alreadyOrdered)
-                        {
-                            waiter.target = customer.transform;
-                            waiter.transform.DOMove(waiter.target.position, 1f);
-                            waiter.isBusy = true;
-                            customer.alreadyOrdered = true;
-                            yield return new WaitForSeconds(5);
-                            waiter.transform.DOMove(waiterExitPos.position, 1f);
-                        }
-                    }
-                }
-            }
-        }
-
-        public void StartOrderWaiter()
-        {
-            
-        }
-
+        
     }
 }

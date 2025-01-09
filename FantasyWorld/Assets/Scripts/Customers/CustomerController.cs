@@ -1,41 +1,84 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Customers;
 using DefaultNamespace;
+using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CustomerController : ScopedSingletonMonoBehaviour<CustomerController>
+namespace Customers
 {
-    public static event Action<Customer> OnCustomerReadyToGo;
-    
-    public Transform customerExitPos;
-    public Transform customerStartPos;
-    public List<CustomerSO> customerList;
-    public List<Customer> activeCustomerList;
-
-    private void OnEnable()
+    public class CustomerController : MonoBehaviour
     {
-        ChairController.OnCustomerRequested += HandleCustomerRequest;
-    }
+        public static CustomerController Instance;
+        public static event Action<Customer> OnCustomerReadyToGo;
+        public List<CustomerSO> customerSo;
+        public List<Customer> activeCustomerList = new List<Customer>();
+        public Transform spawnPoint; // Yeni müşteri spawn noktası
+        public GameObject customerPrefab; // Yeni müşteriler için prefab
+        public Transform customerExitPos;
+        public Transform paymentPos;// Müşterilerin çıkış noktası
 
-    private void OnDisable()
-    {
-        ChairController.OnCustomerRequested -= HandleCustomerRequest;
-    }
+        private void Awake()
+        {
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
 
-    public void HandleCustomerRequest(Chair chair)
-    {
-        var randomCustomer = Random.Range(0, customerList.Count);
-        var newCustomer = Instantiate(customerList[randomCustomer].customerPrefab, customerStartPos.position, Quaternion.identity);
-        activeCustomerList.Add(newCustomer);
-        newCustomer.targetChair = chair.chair.transform;
-        newCustomer.customerExitPos = customerExitPos;
-        newCustomer.customerChair = chair;
-        newCustomer.Initialize(customerList[randomCustomer]);
-        OnCustomerReadyToGo.Invoke(newCustomer);
-        chair.isEmpty = true;
-        Debug.Log("CAGIRILDI");
+        public void AddNewCustomer()
+        {
+            // Yeni müşteriyi oluştur
+            var random = Random.Range(0, customerSo.Count);
+            GameObject newCustomerObj = Instantiate(customerSo[random].customerPrefab.gameObject, spawnPoint.position, Quaternion.identity);
+            Customer newCustomer = newCustomerObj.GetComponent<Customer>();
+            newCustomer.customerSO = customerSo[random];
+
+            if (newCustomer != null)
+            {
+                // Yeni müşteriyi aktif listeye ekle
+                activeCustomerList.Add(newCustomer);
+
+                // Yeni müşteriyi başlat
+                newCustomer.targetChair = GetAvailableChair();
+                newCustomer.customerChair = newCustomer.targetChair.GetComponent<Chair>();
+                newCustomer.customerExitPos = customerExitPos;
+
+                // Tüm garsonlara müşteri geldiğini bildir
+                OnCustomerReadyToGo?.Invoke(newCustomer);
+            }
+            else
+            {
+                Debug.LogError("Yeni müşteri prefab'ında Customer scripti eksik!");
+            }
+        }
+
+        private Transform GetAvailableChair()
+        {
+            // Tüm sandalyeleri kontrol ederek boş bir sandalye bul
+            foreach (Chair chair in FindObjectsOfType<Chair>())
+            {
+                if (chair.isEmpty)
+                {
+                    chair.ReserveChair(); // Sandalyeyi doldur
+                    return chair.customerPosition != null ? chair.customerPosition : chair.transform;
+                }
+            }
+
+            Debug.LogWarning("Boş sandalye bulunamadı!");
+            return null;
+        }
+
+        public void RemoveCustomer(Customer customer)
+        {
+            if (activeCustomerList.Contains(customer))
+            {
+                activeCustomerList.Remove(customer);
+            }
+        }
+
+        [Button]
+        public void CallCustomer()
+        {
+            AddNewCustomer();
+        }
     }
 }

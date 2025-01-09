@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910a73fa32e4ce2964e2bf69338f26a, type: 3}
+  m_Name: Cake 2
+  m_EditorClassIdentifier: 
+  price: 3
+  hasRecipe: 1
+  recipeName: Cake2
+  recipeImage: {fileID: 21300000, guid: 2cc4c147b6b7649d6ac98a928018c544, type: 3}
+  preparationTime: 5
+  ingredients:
+  - ingredient: {fileID: 11400000, guid: dfd0c378529154b778f2c0b0cf16c212, type: 2}
+    amount: 1
+  - ingredient: {fileID: 11400000, guid: 7a66b3f2581f749c39c1768b0dcb3369, type: 2}
+    amount: 3

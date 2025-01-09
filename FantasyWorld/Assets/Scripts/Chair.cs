@@ -3,14 +3,33 @@ using UnityEngine;
 namespace DefaultNamespace
 {
     [System.Serializable]
-    public class Chair
+    public class Chair : MonoBehaviour
     {
-        public bool isEmpty;
-        public GameObject chair;
+        public bool isEmpty = true; // Sandalyenin boş olup olmadığını belirtir
+        public Transform customerPosition; // Müşterinin oturacağı pozisyon
 
-        public bool CheckChairStatus()
+        /// <summary>
+        /// Sandalyeyi müşteriye rezerve eder.
+        /// </summary>
+        public void ReserveChair()
         {
-            return isEmpty;
+            isEmpty = false;
+        }
+
+        /// <summary>
+        /// Sandalyeyi boşaltır.
+        /// </summary>
+        public void FreeChair()
+        {
+            isEmpty = true;
+        }
+
+        /// <summary>
+        /// Müşteriyi sandalyeye oturtur.
+        /// </summary>
+        public Vector3 GetChairPosition()
+        {
+            return customerPosition != null ? customerPosition.position : transform.position;
         }
     }
 }

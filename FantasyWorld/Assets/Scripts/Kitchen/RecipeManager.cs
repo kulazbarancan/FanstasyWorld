@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class RecipeManager : MonoBehaviour
+public class RecipeManager : ScopedSingletonMonoBehaviour<RecipeManager>
 {
     // Mevcut stok
     public List<Ingredient> ingredientList;
@@ -78,6 +78,7 @@ public class RecipeManager : MonoBehaviour
             return false;
         }
     }
+
     public void CookRandomRecipe()
     {
         // Yemek yapılabilecek tarifleri filtrele
@@ -88,7 +89,7 @@ public class RecipeManager : MonoBehaviour
             if (CanCook(recipe))
             {
                 //cookableRecipes.Add(recipe);
-                Debug.Log("RECIPE");
+                Debug.Log("Yemek yapilabilir");
             }
         }
 
