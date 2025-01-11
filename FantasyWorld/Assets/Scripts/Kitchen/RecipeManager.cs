@@ -27,7 +27,7 @@ public class RecipeManager : ScopedSingletonMonoBehaviour<RecipeManager>
         CookRandomRecipe();
     }
     
-    /// Stoğa malzeme ekler.
+    /// Add stock.
     public void AddToStock(Ingredient ingredient, int amount)
     {
         if (ingredientStock.ContainsKey(ingredient))
@@ -44,23 +44,22 @@ public class RecipeManager : ScopedSingletonMonoBehaviour<RecipeManager>
         return recipe.hasRecipe;
     }
 
-    /// Yemek yapabilecek malzeme var mı kontrol eder.
+    /// check recipe can cook
     public bool CanCook(Recipe recipe)
     {
-        if (!OwnsRecipe(recipe)) return false; // Eğer tarife sahip değilsek yemek yapamayız
+        if (!OwnsRecipe(recipe)) return false; //is ingredient is missing u cannot cook
 
         foreach (var recipeIngredient in recipe.ingredients)
         {
             if (!ingredientStock.ContainsKey(recipeIngredient.ingredient) || ingredientStock[recipeIngredient.ingredient] < recipeIngredient.amount)
             {
-                return false; // Malzeme eksik
+                return false; // missing ingredient
             }
         }
         
-        return true; // Tüm malzemeler mevcut
+        return true; // have all ingredient
     }
-
-    /// Yemek yapar ve stoktan gerekli malzemeleri düşer.
+    
     public bool Cook(Recipe recipe)
     {
         if (CanCook(recipe))
@@ -69,12 +68,12 @@ public class RecipeManager : ScopedSingletonMonoBehaviour<RecipeManager>
             {
                 ingredientStock[recipeIngredient.ingredient] -= recipeIngredient.amount;
             }
-            Debug.Log($"{recipe.recipeName} yapıldı!");
+            Debug.Log($"{recipe.recipeName} cooked!");
             return true;
         }
         else
         {
-            Debug.Log($"Yemek yapılamadı: {recipe.recipeName}");
+            Debug.Log($"Cook cannot: {recipe.recipeName}");
             return false;
         }
     }

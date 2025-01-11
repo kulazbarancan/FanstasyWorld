@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
 using NaughtyAttributes;
 using UnityEngine;
@@ -13,10 +14,9 @@ namespace Customers
         public static event Action<Customer> OnCustomerReadyToGo;
         public List<CustomerSO> customerSo;
         public List<Customer> activeCustomerList = new List<Customer>();
-        public Transform spawnPoint; // Yeni müşteri spawn noktası
-        public GameObject customerPrefab; // Yeni müşteriler için prefab
+        public Transform spawnPoint; // new Customer spawn point
         public Transform customerExitPos;
-        public Transform paymentPos;// Müşterilerin çıkış noktası
+        public List<Chair> allChairs;
 
         private void Awake()
         {
@@ -24,46 +24,56 @@ namespace Customers
             else Destroy(gameObject);
         }
 
-        public void AddNewCustomer()
+        private void AddNewCustomer()
         {
-            // Yeni müşteriyi oluştur
+            // Create new customer
+            Chair availableChair = FindAvailableChair();
+            if (availableChair == null)
+            {
+                return;
+            }
             var random = Random.Range(0, customerSo.Count);
-            GameObject newCustomerObj = Instantiate(customerSo[random].customerPrefab.gameObject, spawnPoint.position, Quaternion.identity);
+            GameObject newCustomerObj = Instantiate(customerSo[random].customerPrefab.gameObject, spawnPoint.position,
+                Quaternion.identity);
             Customer newCustomer = newCustomerObj.GetComponent<Customer>();
             newCustomer.customerSO = customerSo[random];
 
             if (newCustomer != null)
             {
-                // Yeni müşteriyi aktif listeye ekle
+                // add Customer to active list
                 activeCustomerList.Add(newCustomer);
 
-                // Yeni müşteriyi başlat
+                // start newCustomer
                 newCustomer.targetChair = GetAvailableChair();
                 newCustomer.customerChair = newCustomer.targetChair.GetComponent<Chair>();
                 newCustomer.customerExitPos = customerExitPos;
 
-                // Tüm garsonlara müşteri geldiğini bildir
+                // Send event to waiter for new Customer
                 OnCustomerReadyToGo?.Invoke(newCustomer);
             }
             else
             {
-                Debug.LogError("Yeni müşteri prefab'ında Customer scripti eksik!");
+                Debug.LogError("Missing script in Customer prefab.!");
             }
         }
 
+        private Chair FindAvailableChair()
+        {
+            return allChairs.Where(chair => chair.isEmpty).FirstOrDefault();
+        }
         private Transform GetAvailableChair()
         {
-            // Tüm sandalyeleri kontrol ederek boş bir sandalye bul
-            foreach (Chair chair in FindObjectsOfType<Chair>())
+            // Look all chars and find empty one
+            foreach (Chair chair in allChairs)
             {
                 if (chair.isEmpty)
                 {
-                    chair.ReserveChair(); // Sandalyeyi doldur
+                    chair.ReserveChair(); // Fill the chair
                     return chair.customerPosition != null ? chair.customerPosition : chair.transform;
                 }
             }
 
-            Debug.LogWarning("Boş sandalye bulunamadı!");
+            Debug.LogWarning("There is no empty chair!");
             return null;
         }
 

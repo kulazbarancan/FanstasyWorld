@@ -7,28 +7,28 @@ namespace DefaultNamespace.Waitors
 {
     public class Waiter : MonoBehaviour
     {
-        public float speed = .1f; // Garson hareket hızı
-        public bool isBusy = false; // Garsonun meşgul olup olmadığını kontrol eder
-        public Transform target; // Garsonun gitmek istediği hedef (müşteri)
+        public float speed = .1f; // waiter speed
+        public bool isBusy = false; // waiter busy or not
+        public Transform target; // waiters target (customer)
 
         private void OnEnable()
         {
-            CustomerController.OnCustomerReadyToGo += AssignCustomerToWaiter; // Müşteri event'ine abone ol
+            CustomerController.OnCustomerReadyToGo += AssignCustomerToWaiter; 
         }
 
         private void OnDisable()
         {
-            CustomerController.OnCustomerReadyToGo -= AssignCustomerToWaiter; // Event'ten çık
+            CustomerController.OnCustomerReadyToGo -= AssignCustomerToWaiter;
         }
 
         private void AssignCustomerToWaiter(Customer customer)
         {
             if (isBusy || customer == null || customer.waiter != null)
-                return; // Garson meşgulse veya müşteri zaten işleniyorsa işlem yapma
+                return; // is waiter is busy return
 
-            // Garsonu müşteriye ata
-            customer.waiter = this; // Bu garson müşteriye atanır
-            StartCoroutine(HandleCustomerOrder(customer)); // İşlemi başlat
+            // assign waiter
+            customer.waiter = this;
+            StartCoroutine(HandleCustomerOrder(customer)); // start process
         }
 
         private IEnumerator HandleCustomerOrder(Customer customer)
@@ -36,12 +36,12 @@ namespace DefaultNamespace.Waitors
             isBusy = true;
 
             Debug.Log("Normal");
-            // Müşteriye git
+            // go to customer
             target = customer.transform;
             yield return new WaitUntil(() => customer.customerOnTable);
             yield return MoveToTarget(target.position);
 
-            // Müşteriyle ilgilen
+            // look customer what he want
             customer.waiterOnTable = true;
             if (customer.angryCustomer)
             {
@@ -49,36 +49,36 @@ namespace DefaultNamespace.Waitors
                 MoveTarget(WaiterController.Instance.waiterExitPos.position);
                 yield break;
             }
-            yield return new WaitForSeconds(5); // Müşteriye hizmet et
+            yield return new WaitForSeconds(5); // serve customer
 
-            // Mutfağa git
+            // go to kitchen
             yield return MoveToTarget(WaiterController.Instance.kitchenPos.position);
 
-            yield return new WaitForSeconds(5); // Yemek hazırlama süresi
+            yield return new WaitForSeconds(5); // wait food until prepare
 
-            // Müşteriye geri dön
+            // get back to customer
             if (target != null)
             {
                 yield return MoveToTarget(target.position);
             }
 
-            yield return new WaitForSeconds(2); // Müşteriye yemek teslim süresi
+            yield return new WaitForSeconds(2); // wait 2 sec after back customer
 
-            // Çıkış pozisyonuna git ve meşgul durumunu sıfırla
+            // back to start pos
             yield return MoveToTarget(WaiterController.Instance.waiterExitPos.position);
 
-            isBusy = false; // Garson tekrar boşta
+            isBusy = false; // busy false
         }
 
         private void MoveTarget(Vector3 targetPosition)
         {
-            transform.DOMove(targetPosition, 1f); // Hedefe hareket et
+            transform.DOMove(targetPosition, 1f);
         }
 
         private IEnumerator MoveToTarget(Vector3 targetPosition)
         {
-            transform.DOMove(targetPosition, 1f); // Hedefe hareket et
-            yield return new WaitForSeconds(1f); // Hareket tamamlanana kadar bekle
+            transform.DOMove(targetPosition, 1f); 
+            yield return new WaitForSeconds(1f); 
         }
     }
 }

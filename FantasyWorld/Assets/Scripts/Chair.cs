@@ -1,3 +1,5 @@
+using System;
+using Customers;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -5,28 +7,26 @@ namespace DefaultNamespace
     [System.Serializable]
     public class Chair : MonoBehaviour
     {
-        public bool isEmpty = true; // Sandalyenin boş olup olmadığını belirtir
-        public Transform customerPosition; // Müşterinin oturacağı pozisyon
+        public bool isEmpty = true; // look chair is empty or not
+        public Transform customerPosition; // Customer sit pos
 
-        /// <summary>
-        /// Sandalyeyi müşteriye rezerve eder.
-        /// </summary>
         public void ReserveChair()
         {
             isEmpty = false;
         }
 
-        /// <summary>
-        /// Sandalyeyi boşaltır.
-        /// </summary>
+        private void Awake()
+        {
+            CustomerController.Instance.allChairs.Add(this);
+        }
+
+     
         public void FreeChair()
         {
             isEmpty = true;
         }
 
-        /// <summary>
-        /// Müşteriyi sandalyeye oturtur.
-        /// </summary>
+      
         public Vector3 GetChairPosition()
         {
             return customerPosition != null ? customerPosition.position : transform.position;

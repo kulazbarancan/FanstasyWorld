@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517be2bd304425790b59dedf24d190d, type: 3}
   m_Name: Eggs
   m_EditorClassIdentifier: 
-  amount: 5
+  amount: 500
   ingredientName: Eggs
   ingredientIcon: {fileID: 21300000, guid: db2a00ff894de47e4a7451b104b04eeb, type: 3}
   price: 0

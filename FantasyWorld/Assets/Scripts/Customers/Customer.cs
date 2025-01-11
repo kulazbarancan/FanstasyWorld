@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -19,23 +18,11 @@ namespace Customers
         public Transform targetChair;
         public Transform customerExitPos;
         public Waiter waiter;
-        public float bill;
-        public float speed;
-        public float money;
-        public int alcoholLimit;
-        public bool alreadyOrdered = false;
-        public bool waiterOnTable = false;
-        public bool customerOnTable = false;
-        public bool angryCustomer = false;
+      
+        public bool waiterOnTable;
+        public bool customerOnTable;
+        public bool angryCustomer;
         public bool hasPaid;
-
-        public void Initialize(CustomerSO so)
-        {
-            customerSO = so;
-            alcoholLimit = so.alcoholLimit;
-            speed = so.customerSpeed;
-            money = CalculateMoneyBasedOnType(so.customerPaymentBehiaviorState);
-        }
 
         private void OnEnable()
         {
@@ -49,7 +36,7 @@ namespace Customers
 
         public void MoveToChair(Customer customer)
         {
-            if (customer != this) return; // Sadece kendisi hedef olmalı
+            if (customer != this) return; // just target himself
             transform.DOMove(targetChair.position, 1f).OnComplete(() =>
             {
                 StartCoroutine(nameof(StartOrder));
@@ -58,7 +45,7 @@ namespace Customers
 
         private IEnumerator StartOrder()
         {
-            // Müşterinin garson çağırmasını başlat
+            // Start customer call waiter
             customerAttentionObject.SetActive(true);
             customerOnTable = true;
             var selectedRecipe = GetRandomRecipe();
@@ -66,20 +53,19 @@ namespace Customers
 
             if (RecipeManager.Instance.CanCook(selectedRecipe))
             {
-                yield return new WaitUntil(() => waiterOnTable); // Garson masaya gelene kadar bekle
+                yield return new WaitUntil(() => waiterOnTable); // wait until waiter on table
 
                 Debug.Log($"Cooking {selectedRecipe.recipeName}");
-                RecipeManager.Instance.Cook(selectedRecipe); // Yemeği pişir
-                bill += selectedRecipe.price;
+                RecipeManager.Instance.Cook(selectedRecipe); // Cook the orders
 
-                yield return new WaitForSeconds(Random.Range(15, 30)); // Bekleme süresi
-                DecideWhatYouWantToDo(); // Müşteri kararını verir
+                yield return new WaitForSeconds(Random.Range(15, 30)); // waiting time
+                DecideWhatYouWantToDo(); // Customer decide
             }
             else
             {
-                // Eğer tarif pişirilemiyorsa, garson geri gönderilir
+                // if the is no ingredient for orders. Waiter will be going back start pos 
                 angryCustomer = true;
-                yield return new WaitUntil(() => waiterOnTable); // Garson masaya gelene kadar bekle
+                yield return new WaitUntil(() => waiterOnTable); // wait until waiter on table
                 LeaveRestaurant();
             }
         }
@@ -93,27 +79,28 @@ namespace Customers
                     break;
                 case CustomerBehaivorEnum.Pay:
                     Debug.Log("Customer paid the bill.");
+                    PaymentSystem.Instance.AddToPaymentQueue(this);
                     break;
                 case CustomerBehaivorEnum.RunNotPay:
                     Debug.Log("Customer ran away without paying!");
                     break;
             }
 
-            LeaveRestaurant();
+           // LeaveRestaurant();
         }
 
-        private void LeaveRestaurant()
+        public void LeaveRestaurant()
         {
             transform.DOMove(customerExitPos.position, 1f).OnComplete(() =>
             {
-                // Sandalyeyi boşalt
+                // make chair empty
                 if (customerChair != null)
                 {
                     customerChair.FreeChair();
                 }
 
-                CustomerController.Instance.RemoveCustomer(this); // Müşteriyi listeden çıkar
-                Destroy(gameObject); // Müşteriyi yok et
+                CustomerController.Instance.RemoveCustomer(this); // Remowe customer from list
+                Destroy(gameObject); // Destroy customer
             });
         }
 
@@ -133,12 +120,6 @@ namespace Customers
         {
             var recipes = RecipeManager.Instance.allRecipes;
             return recipes[Random.Range(0, recipes.Count)];
-        }
-
-        public void MakePayment()
-        {
-            hasPaid = true;
-            Debug.Log("ODEDIM");
         }
     }
 }

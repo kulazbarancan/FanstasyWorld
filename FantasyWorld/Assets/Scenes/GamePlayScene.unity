@@ -151,11 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4441e3e167e54ef6a5a9655e3d829f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  denemePos: {fileID: 178620537}
-  paymentCustomerQueue: []
-  currentCustomer: {fileID: 0}
-  paymentContainer: {fileID: 1836528388}
-  distanceBetweenNPCs: 2
+  paymentPoint: {fileID: 1836528388}
+  paymentQueueStartPoint: {fileID: 1466400047}
+  queueSpacing: 0.5
 --- !u!4 &94237268
 Transform:
   m_ObjectHideFlags: 0
@@ -246,37 +244,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2506256628442055236, guid: f34f09e70e02cc94683d8dbaaf079f2e, type: 3}
   m_PrefabInstance: {fileID: 141344001}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &178620536
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 178620537}
-  m_Layer: 0
-  m_Name: paymentPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &178620537
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 178620536}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.31, y: 0, z: -17.53}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &302054159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1229,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1466400046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466400047}
+  m_Layer: 0
+  m_Name: paymentContainerPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1466400047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466400046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.13, y: 0, z: -22.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836528387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,12 +2005,12 @@ SceneRoots:
   - {fileID: 1840921102}
   - {fileID: 375942255}
   - {fileID: 609261042}
-  - {fileID: 178620537}
   - {fileID: 1836528388}
+  - {fileID: 1466400047}
   - {fileID: 1095278223}
-  - {fileID: 302054162}
-  - {fileID: 855417877}
   - {fileID: 621732901}
   - {fileID: 581300215}
   - {fileID: 1163490734}
   - {fileID: 94237268}
+  - {fileID: 855417877}
+  - {fileID: 302054162}

@@ -6,8 +6,8 @@ namespace DefaultNamespace.Kitchen
     public class Ingredient : ScriptableObject
     {
         public int amount;
-        public string ingredientName;   // Malzeme adı
-        public Sprite ingredientIcon;   // Malzeme görseli (UI için)
-        public float price;             // Malzeme fiyatı (opsiyonel)
+        public string ingredientName;   // ingredientName
+        public Sprite ingredientIcon;   // ingredient image
+        public float price;             // ingredient price
     }
 }

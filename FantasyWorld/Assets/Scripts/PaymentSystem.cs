@@ -1,43 +1,68 @@
+using System.Collections;
 using System.Collections.Generic;
-using Customers;
 using DG.Tweening;
-using NaughtyAttributes;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Customers
 {
     public class PaymentSystem : ScopedSingletonMonoBehaviour<PaymentSystem>
     {
-        public Transform denemePos;
-        public List<Customer> paymentCustomerQueue;
-        public Customer currentCustomer;
-        public Transform paymentContainer;
+        public Transform paymentPoint; // PaymentPos
+        public Transform paymentQueueStartPoint; // Payment start pos
+        public float queueSpacing = 1.5f; // gaps between customers which one on the line
 
-        public void MakePayment(Customer customer)
+        private Queue<Customer> paymentQueue = new Queue<Customer>(); // customers on the payment que
+        private bool isProcessingPayment = false; // check payment pros
+
+ 
+        public void AddToPaymentQueue(Customer customer)
         {
-            currentCustomer = customer;
-            if (currentCustomer != null && !customer.hasPaid)
+            //add customer to payment que
+            if (!paymentQueue.Contains(customer))
             {
-                paymentCustomerQueue.Add(customer);
-                customer.transform.DOMove(paymentContainer.position, 1f);
-                customer.MakePayment();
+                paymentQueue.Enqueue(customer);
+                Debug.Log($"{customer.name} ödeme kuyruğuna eklendi.");
+                ArrangeQueuePositions(); // arrange que pos
+                if (!isProcessingPayment) StartCoroutine(ProcessPaymentQueue());
             }
         }
-        public float distanceBetweenNPCs = 2.0f;  // NPC'ler arasındaki mesafe
-[Button]
-        public void Deneme()
+
+      
+        private IEnumerator ProcessPaymentQueue()
         {
-            for (int i = 0; i < 10; i++)
+            isProcessingPayment = true;
+
+            while (paymentQueue.Count > 0)
             {
-                var go = Instantiate(CustomerController.Instance.customerSo[i].customerPrefab,denemePos.position,Quaternion.identity);
-                paymentCustomerQueue.Add(go);
+                // take next customer
+                Customer currentCustomer = paymentQueue.Dequeue();
+
+                // customer going to payment pos
+                yield return currentCustomer.transform.DOMove(paymentPoint.position,1f);
+
+                // payment time simulation for example 2 sec
+                Debug.Log($"{currentCustomer.name} payment time...");
+                yield return new WaitUntil(() => currentCustomer.hasPaid);
+                yield return new WaitForSeconds(2f);
+
+                // after hasPaid true customer leave restaurant
+                currentCustomer.LeaveRestaurant();
+
+                // arrange que again
+                ArrangeQueuePositions();
             }
 
-            float startXPosition = 0f;  // Başlangıç X pozisyonu
-            for (int i = 0; i < paymentCustomerQueue.Count; i++)
+            isProcessingPayment = false;
+        }
+
+        private void ArrangeQueuePositions()
+        {
+            int index = 0;
+            foreach (var customer in paymentQueue)
             {
-                paymentCustomerQueue[i].transform.position = new Vector3(startXPosition, paymentCustomerQueue[i].transform.position.y, paymentCustomerQueue[i].transform.position.z);
-                startXPosition += distanceBetweenNPCs;  // Sonraki NPC'nin X pozisyonu
+                Vector3 queuePosition = paymentQueueStartPoint.position + Vector3.back * queueSpacing * index;
+                customer.transform.DOMove(queuePosition,1f);
+                index++;
             }
         }
     }
